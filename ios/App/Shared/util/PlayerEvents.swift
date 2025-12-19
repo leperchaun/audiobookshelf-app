@@ -14,4 +14,7 @@ enum PlayerEvents: String {
     case sleepEnded = "com.audiobookshelf.app.player.sleep.ended"
     case failed = "com.audiobookshelf.app.player.failed"
     case localProgress = "com.audiobookshelf.app.player.localProgress"
+    // CarPlay events
+    case carPlayConnected = "com.audiobookshelf.app.carplay.connected"
+    case carPlayDisconnected = "com.audiobookshelf.app.carplay.disconnected"
 }

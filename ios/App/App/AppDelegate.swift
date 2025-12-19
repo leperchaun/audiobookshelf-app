@@ -1,6 +1,7 @@
 import UIKit
 import Capacitor
 import RealmSwift
+import CarPlay
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -123,6 +124,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         backgroundCompletionHandler = completionHandler
     }
 
+    // MARK: - Scene Configuration
 
+    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+        // Check if this is a CarPlay scene
+        if connectingSceneSession.role == CPTemplateApplicationSceneSessionRole {
+            let config = UISceneConfiguration(name: "CarPlay Configuration", sessionRole: connectingSceneSession.role)
+            config.delegateClass = CarPlaySceneDelegate.self
+            return config
+        }
+
+        // Default to main app scene
+        let config = UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
+        config.delegateClass = SceneDelegate.self
+        config.storyboard = UIStoryboard(name: "Main", bundle: nil)
+        return config
+    }
+
+    func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
+        // Handle discarded scenes if needed
+    }
 }
 
